@@ -89,7 +89,7 @@ public class HomeInteractor implements BaseInteractor {
     }
 
     private String createRequestId() {
-        long r = 0;
+        long r;
         r = (long) ((Math.random() + 1) * 1000);
         return System.currentTimeMillis() + String.valueOf(r).substring(1);
     }

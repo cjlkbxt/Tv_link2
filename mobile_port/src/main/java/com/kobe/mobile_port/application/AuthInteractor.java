@@ -23,8 +23,6 @@ import io.reactivex.functions.Consumer;
  */
 public class AuthInteractor implements BaseInteractor {
 
-    private final String TAG = "cjl";
-
     private CompositeDisposable disposables;
 
     public static volatile Boolean isTimeCorrect;

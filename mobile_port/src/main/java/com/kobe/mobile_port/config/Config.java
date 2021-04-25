@@ -6,6 +6,7 @@ package com.kobe.mobile_port.config;
  * Author:jimlee.
  */
 public class Config {
+
     public static String authToken;
     public static String cid;
     public static final String appId = "bN7YgjNtrt8lLNIcUsrid8";

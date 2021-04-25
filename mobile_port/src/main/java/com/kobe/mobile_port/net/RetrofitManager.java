@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitManager {
 
-    private static NetApi netApi;
+    private static final NetApi netApi;
 
     static {
         OkHttpClient httpClient = new OkHttpClient.Builder()
@@ -46,7 +46,6 @@ public class RetrofitManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
-
 
     public static Observable<AuthResp> auth(AuthRequest authRequest) {
         return netApi.auth(Config.appId, authRequest)
