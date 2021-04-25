@@ -1,0 +1,71 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.kobe.tv_port"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        manifestPlaceholders = [
+                GETUI_APPID: "bN7YgjNtrt8lLNIcUsrid8",
+        ]
+
+        ndk {
+            // 注意：这里需要添加项目所需 CPU 类型的最小集
+            abiFilters "armeabi", "armeabi-v7a", "x86_64", "x86"
+        }
+    }
+
+    //签名
+    signingConfigs {
+        debug {
+            storeFile file("./tv_port.jks")
+            storePassword "123456"
+            keyAlias "kobe"
+            keyPassword "123456"
+        }
+        release {
+            storeFile file("./tv_port.jks")
+            storePassword "123456"
+            keyAlias "kobe"
+            keyPassword "123456"
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation "androidx.appcompat:appcompat:$rootProject.appcompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayoutVersion"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+
+    implementation "org.greenrobot:eventbus:$rootProject.eventBusVersion"
+
+    implementation 'com.getui:gtsdk:3.1.4.0'  //个推SDK
+    implementation 'com.getui:gtc:3.1.0.0'  //个推核心组件
+
+    implementation project(':lib_zxing')
+    implementation project(':lib_base')
+}
