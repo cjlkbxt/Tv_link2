@@ -28,6 +28,9 @@ android {
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:$rootProject.appcompatVersion"
-    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    api "androidx.appcompat:appcompat:$rootProject.appcompatVersion"
+    api "com.google.android.material:material:$rootProject.materialVersion"
+    api "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayoutVersion"
+
+    api "com.google.code.gson:gson:$rootProject.gsonVersion"
 }

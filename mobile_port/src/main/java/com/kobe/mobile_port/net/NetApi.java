@@ -3,6 +3,7 @@ package com.kobe.mobile_port.net;
 
 import com.kobe.mobile_port.net.request.AuthRequest;
 import com.kobe.mobile_port.net.request.LinkNotificationRequest;
+import com.kobe.mobile_port.net.request.TransmissionRequest;
 import com.kobe.mobile_port.net.response.AuthResp;
 import com.kobe.mobile_port.net.response.NotificationResp;
 
@@ -20,8 +21,7 @@ import retrofit2.http.Path;
 public interface NetApi {
 
     @POST("v1/{appid}/push_single")
-    Observable<NotificationResp> sendNotification(@Header("authtoken") String authtoken, @Path("appid") String appId, @Body LinkNotificationRequest notificationRequest);
-
+    Observable<NotificationResp> sendTransmission(@Header("authtoken") String authtoken, @Path("appid") String appId, @Body TransmissionRequest transmissionRequest);
 
     @POST("v1/{appid}/auth_sign")
     Observable<AuthResp> auth(@Path("appid") String appId, @Body AuthRequest authRequest);

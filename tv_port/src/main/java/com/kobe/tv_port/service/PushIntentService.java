@@ -6,6 +6,7 @@ import com.igexin.sdk.GTIntentService;
 import com.igexin.sdk.message.GTCmdMessage;
 import com.igexin.sdk.message.GTNotificationMessage;
 import com.igexin.sdk.message.GTTransmitMessage;
+import com.kobe.lib_base.SpManager;
 import com.kobe.tv_port.event.CidEvent;
 import com.kobe.tv_port.event.UrlEvent;
 
@@ -20,13 +21,16 @@ public class PushIntentService extends GTIntentService {
 
     @Override
     public void onReceiveClientId(Context context, String s) {
+        SpManager.getInstance(context).put("cid", s);
         CidEvent cidEvent = new CidEvent();
-        cidEvent.cid = s;
         EventBus.getDefault().post(cidEvent);
     }
 
     @Override
     public void onReceiveMessageData(Context context, GTTransmitMessage gtTransmitMessage) {
+        UrlEvent urlEvent = new UrlEvent();
+        urlEvent.url = new String(gtTransmitMessage.getPayload());
+        EventBus.getDefault().post(urlEvent);
     }
 
     @Override
@@ -41,9 +45,7 @@ public class PushIntentService extends GTIntentService {
 
     @Override
     public void onNotificationMessageArrived(Context context, GTNotificationMessage gtNotificationMessage) {
-        UrlEvent urlEvent = new UrlEvent();
-        urlEvent.url = gtNotificationMessage.getContent();
-        EventBus.getDefault().post(urlEvent);
+
     }
 
     @Override

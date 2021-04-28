@@ -17,21 +17,16 @@ public class LinkNotificationRequest {
         public String appkey;
         public boolean is_offline;
         public String msgtype;
-
     }
 
     public static class LinkTemplate {
-
         public Style style;
         public String url;
         public String duration_begin;
         public String duration_end;
-
-
     }
 
     public static class Style {
-
         public int type;
         public String text;
         public String title;
@@ -44,6 +39,4 @@ public class LinkNotificationRequest {
         public boolean is_clearable;
         public String notify_id;
     }
-
-
 }

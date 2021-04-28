@@ -2,6 +2,7 @@ package com.kobe.mobile_port.application;
 
 import android.text.TextUtils;
 
+import com.kobe.lib_base.BaseInteractor;
 import com.kobe.mobile_port.config.Config;
 import com.kobe.mobile_port.net.RetrofitManager;
 import com.kobe.mobile_port.net.request.AuthRequest;
@@ -23,7 +24,7 @@ import io.reactivex.functions.Consumer;
  */
 public class AuthInteractor implements BaseInteractor {
 
-    private CompositeDisposable disposables;
+    private final CompositeDisposable disposables;
 
     public static volatile Boolean isTimeCorrect;
 

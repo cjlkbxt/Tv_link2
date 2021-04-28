@@ -2,7 +2,9 @@ package com.kobe.tv_port;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
@@ -12,6 +14,8 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.kobe.lib_base.DataBean;
+import com.kobe.lib_base.SpManager;
 import com.kobe.lib_zxing.zxing.encoding.EncodingUtils;
 import com.kobe.tv_port.event.CidEvent;
 import com.kobe.tv_port.event.UrlEvent;
@@ -39,18 +43,36 @@ public class MainActivity extends AppCompatActivity {
         mWebView.setWebViewClient(new WebViewClient());
         mWebView.setWebChromeClient(new WebChromeClient());
 
+        setQrCodeBitmap();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUrlEvent(UrlEvent urlEvent) {
-        mWebView.setVisibility(View.VISIBLE);
-        mWebView.loadUrl(urlEvent.url);
+        if (!TextUtils.equals(urlEvent.url, "close")) {
+            mWebView.setVisibility(View.VISIBLE);
+            mWebView.loadUrl(urlEvent.url);
+        } else {
+            mWebView.setVisibility(View.GONE);
+        }
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onQrCodeEvent(CidEvent cidEvent) {
-        Bitmap qrCodeBitmap = EncodingUtils.createQRCode("cid_" + cidEvent.cid, 400, 400, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
-        // 设置图片
-        mIvQrcode.setImageBitmap(qrCodeBitmap);
+        setQrCodeBitmap();
+    }
+
+    private void setQrCodeBitmap() {
+        String cid = SpManager.getInstance(this).get("cid", "");
+        DataBean dataBean = new DataBean();
+        dataBean.manufacturer = Build.MANUFACTURER;
+        dataBean.model = Build.MODEL;
+        dataBean.cid = cid;
+        if (!TextUtils.isEmpty(cid)) {
+
+            Bitmap qrCodeBitmap = EncodingUtils.createQRCode(dataBean.toString(), 400, 400, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+            // 设置图片
+            mIvQrcode.setImageBitmap(qrCodeBitmap);
+        }
     }
 }

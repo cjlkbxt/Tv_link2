@@ -1,4 +1,6 @@
-package com.kobe.mobile_port.application;
+package com.kobe.mobile_port.ui;
+
+import com.kobe.lib_base.BaseInteractor;
 
 /**
  * Time：2020-03-09 on 15:25.
@@ -7,16 +9,16 @@ package com.kobe.mobile_port.application;
  */
 public class HomePresenter implements HomeInteractor.NotificationListener {
 
-    private HomeView homeView;
-    private BaseInteractor notificationInteractor;
+    private final HomeView homeView;
+    private final BaseInteractor notificationInteractor;
 
     public HomePresenter(HomeView homeView) {
         this.homeView = homeView;
         this.notificationInteractor = new HomeInteractor();
     }
 
-    public void sendNotification(String msg) {
-        ((HomeInteractor) notificationInteractor).sendNotification(msg, this);
+    public void sendTransmission(String msg) {
+        ((HomeInteractor) notificationInteractor).sendTransmission(msg, this);
     }
 
     @Override
