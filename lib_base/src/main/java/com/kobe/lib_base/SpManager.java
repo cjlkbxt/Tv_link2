@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SpManager {
-    private SharedPreferences mSp;
-    private SharedPreferences.Editor mEditor;
+    private final SharedPreferences mSp;
+    private final SharedPreferences.Editor mEditor;
 
     private static SpManager mSpManager = null;
 

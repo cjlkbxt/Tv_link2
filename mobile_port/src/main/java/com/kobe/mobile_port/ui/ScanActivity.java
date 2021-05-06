@@ -40,6 +40,7 @@ public class ScanActivity extends BaseActivity implements HomePresenter.HomeView
     private TextView mTvDeviceInfo;
     private ImageView mIvClose;
 
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,12 +89,7 @@ public class ScanActivity extends BaseActivity implements HomePresenter.HomeView
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!TextUtils.isEmpty(editable.toString())) {
-                    mTvConfirm.setEnabled(true);
-                } else {
-                    mTvConfirm.setEnabled(false);
-                }
-
+                mTvConfirm.setEnabled(!TextUtils.isEmpty(editable.toString()));
             }
         });
         mTvConfirm.setOnClickListener(v -> homePresenter.sendTransmission(mEtInput.getEditableText().toString().trim()));
